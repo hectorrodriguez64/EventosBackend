@@ -45,13 +45,13 @@ public class UsuariosREST {
      * @return lista de usuarios
      */
     @GET
-    @RolesAllowed({"ADMIN"})
+    //@RolesAllowed({"ADMIN"})
     public List<Usuarios> findAll(@QueryParam("idUsuario") Integer idUsuario,
           
             @QueryParam("activo") Boolean activo,
             @QueryParam("numDocumento") String numDocumento,
             @QueryParam("email") String email, 
-            @QueryParam("idTipoDocumento") idTipoDocumento){
+            @QueryParam("idTipoDocumento") Integer idTipoDocumento){
 
         return usuarioEJB.findUsers(idUsuario, activo, numDocumento,
                 email, idTipoDocumento);
@@ -75,44 +75,6 @@ public class UsuariosREST {
      * @param usuario
      * @return
      */
-    @POST
-    public Response create(Usuarios usuario) {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.create();
-        String pass = usuario.getPassword();
-        try {
-            if (usuarioEJB.findUsuariosByEmail(usuario.getEmail()) == null) {
-                if (usuarioEJB.findUsuariosByNumDocumento(usuario.getNumDocumento()) == null) {
-
-                    usuario.setPassword(DigestUtil.cifrarPassword(usuario.getPassword()));
-                    usuarioEJB.create(usuario);
-                    try {
-
-                        //Uso configuración de email para Registro
-                        Email email = emailEJB.findConfigEmail("REGISTRO");
-                        if (emailApp == null) {
-                            emailApp = emailEJB.findConfigEmail("GENERAL");
-                        }
-                        //Envio de email
-                        SendEmail enviarEmailUser = new SendEmail();
-                        enviarEmailUser.sendEmailRegistroUsuario(emailApp, usuario, pass);
-
-                        return Response.status(Response.Status.CREATED).entity(gson.toJson("El usuario se creó correctamente!")).build();
-                    } catch (Exception e) {
-                        System.out.println("ERROR ENVIO DE EMAIL: " + e);
-                        return Response.status(Response.Status.BAD_REQUEST).entity(gson.toJson("No fue posible el envio del email")).build();
-                    }
-                } else {
-                    return Response.status(Response.Status.BAD_REQUEST).entity(gson.toJson("El número de documento ya se encuentra registrado!.")).build();
-                }
-            } else {
-                return Response.status(Response.Status.BAD_REQUEST).entity(gson.toJson("El email ya se encuentra registrado!.")).build();
-            }
-        } catch (Exception e) {
-            Logger.getLogger(UsuariosREST.class.getName()).log(Level.SEVERE, null, e);
-            return Response.status(Response.Status.BAD_REQUEST).entity(gson.toJson("Error al guardar el usuario!.")).build();
-        }
-    }
 
     /**
      * Edita un usuario

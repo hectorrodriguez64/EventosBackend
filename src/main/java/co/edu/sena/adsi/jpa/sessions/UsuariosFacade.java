@@ -79,9 +79,8 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
         }
     }
     
-    public List<Usuarios> findUsers(Integer idUsuario, String sexo, Boolean activo,
-            String numDocumento, String email, Integer idCiudad, Integer idDepartamento,
-            Integer idTipoDocumento){
+    public List<Usuarios> findUsers(Integer idUsuario, Boolean activo,
+            String numDocumento, String email, Integer idTipoDocumento){
         
         CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<Usuarios> cq = cb.createQuery(Usuarios.class);
