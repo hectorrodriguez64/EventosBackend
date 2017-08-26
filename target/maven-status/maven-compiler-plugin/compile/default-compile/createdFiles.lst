@@ -14,6 +14,7 @@ co/edu/sena/adsi/jpa/entities/Equipos_.class
 co/edu/sena/adsi/jpa/sessions/AbstractFacade.class
 co/edu/sena/adsi/rest/services/EquiposREST.class
 co/edu/sena/adsi/rest/auth/SecurityFilter$Authorizer.class
+co/edu/sena/adsi/rest/services/RolREST.class
 co/edu/sena/adsi/jpa/entities/Eventos.class
 co/edu/sena/adsi/rest/services/AppConfig.class
 co/edu/sena/adsi/jpa/entities/Rol.class
@@ -21,7 +22,6 @@ co/edu/sena/adsi/jpa/sessions/TipoDocumentoFacade.class
 co/edu/sena/adsi/jpa/entities/TipoDocumento_.class
 co/edu/sena/adsi/jpa/entities/Eventos_.class
 co/edu/sena/adsi/rest/services/TipoDocumentoREST.class
-co/edu/sena/adsi/rest/services/RolesREST.class
 co/edu/sena/adsi/rest/services/EventosREST.class
 co/edu/sena/adsi/rest/services/UsuariosREST.class
 co/edu/sena/adsi/jpa/entities/Asistencias.class
